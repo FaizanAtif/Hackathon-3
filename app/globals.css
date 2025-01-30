@@ -10,6 +10,23 @@
     background-image: url('../../my-app/public/image3.jpg');
 }
 
+.custom-img3{
+    background-image: url('../../my-app/public/grailify-W28WkL5Tr2M-unsplash.jpg');
+
+}
+
+.custom-img4{
+    background-image: url('../../my-app/public/grailify-TqXZfMOKR14-unsplash.jpg');
+}
+
+.custom-img5{
+    background-image: url('../../my-app/public/grailify-FVU4juuS9GM-unsplash.jpg');
+}
+
+.custom-img6{
+    background-image: url('../../my-app/public/mike-cox-NrhgewTdfF8-unsplash.jpg');
+}
+
 @layer base {
   :root {
         --background: 0 0% 100%;

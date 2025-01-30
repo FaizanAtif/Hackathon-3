@@ -5,9 +5,8 @@ import React from 'react'
 const Shop = () => {
   return (
     <div>
-<ShopHero/>
-<Product/>
-
+        <ShopHero/>
+        <Product/>
     </div>
   )
 }

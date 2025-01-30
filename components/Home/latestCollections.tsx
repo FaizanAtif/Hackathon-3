@@ -2,9 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import { client } from "@/sanity/lib/client";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 
-// Updated query to fetch image URLs, product name, description, and price
 const query = `*[_type == 'collection']{
   productName,
   "imageUrl": image.asset->url,
@@ -24,18 +22,6 @@ export function LatestCollections() {
     fetchData();
   }, []);
 
-  const handleLeftArrowClick = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft -= 300; // Adjust scroll distance as needed
-    }
-  };
-
-  const handleRightArrowClick = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft += 300; // Adjust scroll distance as needed
-    }
-  };
-
   const cards = products.map((product, index) => (
     <Card
       key={index}
@@ -44,9 +30,9 @@ export function LatestCollections() {
         title: product.productName,
         category: product.description,
         content: (
-          <div>
-            <p>{product.description}</p>
-            <h3 className="font-bold">Price: ${product.price}</h3>
+          <div className="space-y-2">
+            <p className="text-sm text-gray-600">{product.description}</p>
+            <h3 className="font-bold text-lg">Price: ${product.price}</h3>
           </div>
         ),
       }}
@@ -55,43 +41,35 @@ export function LatestCollections() {
   ));
 
   return (
-    <div className="w-full h-full py-36">
-      <h2 className="max-w-7xl text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans mx-auto text-center mt-2 mb-16">
-        Our Latest Collections
-      </h2>
-      <div className="relative w-full">
-        {/* Left Arrow */}
-        <button
-          onClick={handleLeftArrowClick}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200"
-        >
-          <IconArrowNarrowLeft className="w-6 h-6 text-gray-600" />
-        </button>
+    <div className="w-full max-w-[1440px] mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div className="mt-11 mb-6 text-center">
+        <p className="font-bold text-lg sm:text-2xl text-black">NEW THIS MONTH</p>
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-6xl">
+          NEW ARRIVALS
+        </h1>
+        <p className="italic font-bold text-xl sm:text-2xl text-black">
+          "They are the foundation of your next great look."
+        </p>
+      </div>
 
-        {/* Carousel */}
+      <div className="relative w-full">
         <div
           ref={carouselRef}
-          className="flex overflow-hidden py-4" // Ensures no bottom slider
+          className="flex overflow-x-auto scroll-snap-x-mandatory scrollbar-hide py-8"
         >
-          <div className="flex space-x-4 mx-auto">
+          <div className="flex gap-6 md:gap-8 lg:gap-10 mx-auto px-4 sm:px-0">
             {cards.map((item, index) => (
               <div
                 key={index}
-                className="transition-all duration-500 ease-in-out transform hover:scale-105"
+                className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[350px] 
+                         transition-all duration-500 ease-in-out transform 
+                         hover:scale-105 hover:shadow-xl rounded-lg"
               >
                 {item}
               </div>
             ))}
           </div>
         </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={handleRightArrowClick}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200"
-        >
-          <IconArrowNarrowRight className="w-6 h-6 text-gray-600" />
-        </button>
       </div>
     </div>
   );

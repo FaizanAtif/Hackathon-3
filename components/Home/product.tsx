@@ -49,7 +49,7 @@ const Product = () => {
     <h1 className="scroll-m-20 text-xl font-bold tracking-tight"> Price: ${val.price}</h1>
     <div className="card-actions justify-end">
       <AnimatedButton/>
-      <Button className="bg-blue-600 w-[155px]">Buy Now</Button>
+      <Button className="bg-red-600 w-[155px]">Buy Now</Button>
     </div>
   </div>
 </div>
