@@ -4,6 +4,7 @@ import { NavbarCenter } from './ui/navbarCenter';
 import Image from 'next/image';
 import logo from '@/public/33671a8e057f2690c4272821871507bf-removebg-preview.png';
 import { SignUpButton, UserButton, useUser } from '@clerk/nextjs';
+import Link from 'next/link';
 
 const Navber = () => {
   const { isSignedIn } = useUser();
@@ -89,6 +90,7 @@ const Navber = () => {
 
         {/* Cart Dropdown */}
         <div className="dropdown dropdown-end z-10">
+          <Link href={'/cart'}>
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle relative">
             <div className="indicator">
               <svg
@@ -108,18 +110,8 @@ const Navber = () => {
               <span className="badge badge-sm indicator-item">8</span>
             </div>
           </div>
-          <div
-            tabIndex={0}
-            className="card card-compact dropdown-content bg-base-100 mt-3 w-52 shadow-md"
-          >
-            <div className="card-body">
-              <span className="text-lg font-bold">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
-              </div>
-            </div>
-          </div>
+          </Link>
+
         </div>
 
         {/* User Avatar and Sign Up Button */}
