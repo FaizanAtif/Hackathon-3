@@ -1,4 +1,4 @@
-import AnimatedButton from '@/components/ui/animated-button'
+
 import { Button } from '@/components/ui/button'
 import { client } from '@/sanity/lib/client'
 import Link from 'next/link'
@@ -45,8 +45,9 @@ const Product = () => {
      <p className=''>In Stock {val.inventory}</p>
     <h1 className="scroll-m-20 text-xl font-bold tracking-tight"> Price: ${val.price}</h1>
     <div className="card-actions justify-end">
-      <AnimatedButton/>
-      <Button className="bg-red-600 w-[155px]">Buy Now</Button>
+     
+      <Button className="bg-gray-300 text-black hover:bg-gray-700 hover:text-white font-semibold w-[195px]">Add to Cart</Button>
+      <Button className="bg-red-600 w-[165px]">Buy Now</Button>
     </div>
   </div>
 </div>

@@ -1,5 +1,4 @@
-import Services from '@/components/About/services'
-import Stats from '@/components/About/stats'
+
 import React from 'react'
 import Image from 'next/image'
 import men1 from '../../public/men1.jpg'

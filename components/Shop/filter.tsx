@@ -68,9 +68,9 @@ const filters = [
   },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(' ')
+// }
 
 export default function Filter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
@@ -203,10 +203,10 @@ export default function Filter() {
                       <MenuItem key={option.name}>
                         <a
                           href={option.href}
-                          className={classNames(
-                            option.current ? 'font-medium text-gray-900' : 'text-gray-500',
-                            'block px-4 py-2 text-sm data-focus:bg-gray-100 data-focus:outline-hidden',
-                          )}
+                          // className={classNames(
+                          //   option.current ? 'font-medium text-gray-900' : 'text-gray-500',
+                          //   'block px-4 py-2 text-sm data-focus:bg-gray-100 data-focus:outline-hidden',
+                          // )}
                         >
                           {option.name}
                         </a>

@@ -3,7 +3,6 @@ import Product from '@/components/Shop/product';
 import {client} from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
 import Image from 'next/image';
-import { useState } from 'react';
 
 interface Product {
     params:  Promise<{slug: string}>

@@ -61,7 +61,7 @@ const Cart = () => {
                     className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
                     placeholder=""
                     defaultValue={1}
-                    required=""
+                    required={true}
                   />
                   <button
                     type="button"
@@ -198,7 +198,7 @@ const Cart = () => {
                     className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
                     placeholder=""
                     defaultValue={3}
-                    required=""
+                    required= {true}
                   />
                   <button
                     type="button"
@@ -389,7 +389,7 @@ const Cart = () => {
                 id="voucher"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                 placeholder=""
-                required=""
+                required={true}
               />
             </div>
             <button
