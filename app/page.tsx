@@ -6,6 +6,7 @@ import GridPics from "@/components/Home/gridPics";
 import Category from "@/components/ui/category";
 
 
+
 export default function Home() {
   return (
    <div>

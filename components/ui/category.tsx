@@ -8,10 +8,10 @@ import Link from 'next/link'
 
 const Category = () => {
   const categories = [
-    { image: boots, title: "BOOTS", href: "/boots" },
-    { image: running, title: "RUNNING SHOES", href: "/running-shoes" },
-    { image: training, title: "TRAINING SHOES", href: "/training-shoes" },
-    { image: football, title: "FOOTBALL SHOES", href: "/football-shoes" },
+    { image: boots, title: "BOOTS", href: "/shop" },
+    { image: running, title: "RUNNING SHOES", href: "/shop" },
+    { image: training, title: "TRAINING SHOES", href: "/shop" },
+    { image: football, title: "FOOTBALL SHOES", href: "/shop" },
   ]
 
   return (
