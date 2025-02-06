@@ -26,6 +26,10 @@
     background-image: url('/mike-cox-NrhgewTdfF8-unsplash.jpg');
 }
 
+.custom-img7 {
+  background-image: url('/public/shoeBanner.png');
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

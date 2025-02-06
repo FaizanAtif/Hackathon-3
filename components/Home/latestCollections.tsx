@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { Card } from "@/components/ui/apple-cards-carousel";
 import { client } from "@/sanity/lib/client";
 
 const query = `*[_type == 'collection']{

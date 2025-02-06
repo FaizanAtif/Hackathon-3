@@ -1,8 +1,10 @@
+import Link from 'next/link';
 import React from 'react';
 
 const GridPics = () => {
   return (
     <div>
+      
     <div className="mb-10 mt-11 text-center">
         <p className="font-bold text-2xl mb-2">OUR FAVOURITE SHOES</p>
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-6xl">
@@ -15,7 +17,10 @@ const GridPics = () => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full  mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         
       {/* First Grid Item */}
+      <Link href={'/product/urban-racer'}>
+     
       <div className="relative h-[40rem] sm:h-[40rem] md:h-[40rem] group overflow-hidden rounded-lg">
+        
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat custom-img3 transform transition-transform duration-500 group-hover:scale-105"
           style={{ backgroundSize: 'cover' }}
@@ -35,8 +40,10 @@ const GridPics = () => {
           </div>
         </div>
       </div>
+      </Link>
 
       {/* Second Grid Item */}
+      <Link href={'/product/track-master'}>
       <div className="relative h-[24rem] sm:h-[40rem] md:h-[40rem] group overflow-hidden rounded-lg">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat custom-img4 transform transition-transform duration-500 group-hover:scale-105"
@@ -56,8 +63,10 @@ const GridPics = () => {
           </div>
         </div>
       </div>
+      </Link>
 
       {/* third item */}
+      <Link href={'/product/swift-stride'}>
       <div className="relative h-[24rem] sm:h-[40rem] md:h-[40rem] group overflow-hidden rounded-lg">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat custom-img5 transform transition-transform duration-500 group-hover:scale-105"
@@ -77,7 +86,9 @@ const GridPics = () => {
           </div>
         </div>
       </div>
+      </Link>
       {/* fourth item */}
+      <Link href={'/product/enduro-jett'}>
 
       <div className="relative h-[24rem] sm:h-[40rem] md:h-[40rem] group overflow-hidden rounded-lg">
         <div 
@@ -98,6 +109,7 @@ const GridPics = () => {
           </div>
         </div>
       </div>
+      </Link>
     </div>
     </div>
   );

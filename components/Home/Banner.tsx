@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import React from "react";
 
 const Banner = () => {
@@ -14,9 +15,11 @@ const Banner = () => {
               THE ULTIMATE SPORTS SHOE FOR PERFORMANCE
             </h1>
             <div className="flex justify-center">
+              <Link href={"/shop"}>
               <button className="btn bg-white text-black border-2 border-white text-lg font-extrabold px-8  hover:bg-transparent hover:text-white transition duration-300">
                 SHOP NOW
               </button>
+              </Link>
             </div>
           </div>
         </div>

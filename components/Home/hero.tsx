@@ -9,10 +9,9 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Hero() {
   const images = [bann4, bann2, bann3, bann1]
@@ -55,14 +54,19 @@ export default function Hero() {
           Where every step blends comfort, style, and unmatched performance.
         </p>
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <Link href={"/shop"}>
           {/* White outlined button */}
           <button className="bg-transparent text-white border-2 border-white py-2 px-6 rounded-md hover:bg-white hover:text-black transition font-bold">
             SHOP NOW
           </button>
+          </Link>
           {/* Black outlined button */}
+
+          <Link href={"/product/nike-standard-issue-basketball-jersey"}>
           <button className="bg-transparent text-white border-2 border-white py-2 px-6 rounded-md hover:bg-white hover:text-black transition font-bold">
             ADD TO CART
           </button>
+          </Link>
         </div>
       </div>
     </div>
