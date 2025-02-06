@@ -4,6 +4,7 @@ import men1 from '../../public/men1.jpg';
 import men2 from '../../public/men2.jpg';
 import men3 from '../../public/men3.jpg';
 import men4 from '../../public/men4.jpg';
+import { StaticImageData } from 'next/image';
 
 interface TeamMember {
   id: number;
