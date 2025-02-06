@@ -21,7 +21,6 @@ const ImagesSlider = ({
   direction?: "up" | "down";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
   // Handle next image
@@ -41,10 +40,9 @@ const ImagesSlider = ({
   // Load images on component mount
   useEffect(() => {
     loadImages();
-  }, []);
+  }, [images]); // Add `images` as a dependency to reload images if the array changes
 
   const loadImages = () => {
-    setLoading(true);
     const loadPromises = images.map((image) => {
       return new Promise<string>((resolve, reject) => {
         const img = new Image();
@@ -58,7 +56,6 @@ const ImagesSlider = ({
     Promise.all(loadPromises)
       .then((loadedImages) => {
         setLoadedImages(loadedImages);
-        setLoading(false);
       })
       .catch((error) => console.error("Failed to load images", error));
   };
@@ -87,7 +84,7 @@ const ImagesSlider = ({
       window.removeEventListener("keydown", handleKeyDown);
       if (interval) clearInterval(interval);
     };
-  }, [autoplay]);
+  }, [autoplay, handleNext, handlePrevious]); // Added dependencies to prevent missing ones
 
   // Animation variants for sliding effect
   const slideVariants = {

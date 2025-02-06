@@ -27,7 +27,7 @@ export default function ProductCarousel() {
           BEST SELLING
         </h1>
         <p className="italic font-bold text-2xl mt-2">
-          "Don't wait for opportunities, create them"
+          Dont wait for opportunities, create them
         </p>
       </div>
       <Carousel

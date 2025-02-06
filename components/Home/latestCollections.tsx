@@ -3,6 +3,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { Card } from "@/components/ui/apple-cards-carousel";
 import { client } from "@/sanity/lib/client";
 
+// Define the interface for a product
+interface Product {
+  productName: string;
+  imageUrl: string;
+  description: string;
+  price: number;
+}
+
 const query = `*[_type == 'collection']{
   productName,
   "imageUrl": image.asset->url,
@@ -11,7 +19,8 @@ const query = `*[_type == 'collection']{
 }`;
 
 export function LatestCollections() {
-  const [products, setProducts] = useState<any[]>([]);
+  // Use the Product interface to type the products state
+  const [products, setProducts] = useState<Product[]>([]);
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -48,7 +57,7 @@ export function LatestCollections() {
           NEW ARRIVALS
         </h1>
         <p className="italic font-bold text-xl sm:text-2xl text-black">
-          "They are the foundation of your next great look."
+          They are the foundation of your next great look.
         </p>
       </div>
 

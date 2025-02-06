@@ -11,7 +11,7 @@ const GridPics = () => {
           URBAN FAVOURITE
         </h1>
         <p className="italic font-bold text-2xl mt-2">
-          "They are the foundation of your next great look."
+          They are the foundation of your next great look.
         </p>
       </div>
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full  mx-auto px-4 sm:px-6 lg:px-8 mb-24">

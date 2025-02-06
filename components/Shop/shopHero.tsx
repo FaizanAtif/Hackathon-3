@@ -17,7 +17,7 @@ const ShopHero: React.FC = () => {
               Up to 50% OFF!
             </h1>
             <p className="max-w-2xl text-black dark:text-gray-400 md:text-lg lg:text-xl">
-              Don't Wait - Limited Stock at Unbeatable Prices!
+              Dont Wait - Limited Stock at Unbeatable Prices!
             </p>
           </div>
 

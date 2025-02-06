@@ -3,6 +3,7 @@ import React from 'react';
 // Define types for better TypeScript support
 type ContProps = {
   // Add any props if needed
+  String: string;
 };
 
 const Cont: React.FC<ContProps> = () => {
