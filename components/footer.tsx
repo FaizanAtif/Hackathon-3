@@ -3,13 +3,9 @@ import React from 'react';
 import logo from '@/public/33671a8e057f2690c4272821871507bf-removebg-preview.png';
 
 // Define types for better TypeScript support
-type FooterProps = {
-  categories: string[];
-  subscribeText: string;
-  socialLinks: { [key: string]: string };
-};
 
-const Footer: React.FC<FooterProps> = () => {
+
+const Footer: React.FC = () => {
   return (
     <footer className="text-black body-font bg-slate-50">
       <div className="container px-5 py-24 mx-auto">
