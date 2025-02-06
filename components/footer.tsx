@@ -4,7 +4,9 @@ import logo from '@/public/33671a8e057f2690c4272821871507bf-removebg-preview.png
 
 // Define types for better TypeScript support
 type FooterProps = {
-  message: string;
+  categories: string[];
+  subscribeText: string;
+  socialLinks: { [key: string]: string };
 };
 
 const Footer: React.FC<FooterProps> = () => {
