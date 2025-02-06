@@ -2,11 +2,10 @@ import React from 'react';
 
 // Define types for better TypeScript support
 type ContProps = {
-  // Add any props if needed
-  String: string;
+  message: string; // Rename 'String' to 'message' to avoid conflict with built-in type
 };
 
-const Cont: React.FC<ContProps> = () => {
+const Cont: React.FC<ContProps> = ({ message }) => { // Use destructuring to get 'message' prop
   return (
     <section className="text-gray-600 body-font relative">
       <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
@@ -100,7 +99,7 @@ const Cont: React.FC<ContProps> = () => {
               id="message"
               name="message"
               className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-              defaultValue={""}
+              defaultValue={message} // Use the message prop here
               aria-label="Message input for feedback form"
             />
           </div>
