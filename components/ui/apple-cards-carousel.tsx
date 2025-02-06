@@ -164,39 +164,40 @@ export const Card = ({
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { onCardClose } = useContext(CarouselContext); // Removed currentIndex as it was not needed
-
+  const handleClose = () =>  {
+    setOpen(false);
+    onCardClose(index);
+  };
+  
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        handleClose();
+        handleClose();  // Ab yeh error nahi aayegi
       }
     }
-
+  
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-
+  
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, handleClose]);  // handleClose ko ab dependencies mein rakhna hai
+  
+  
 
   useEffect(() => {
     if (containerRef.current) {
-      useOutsideClick(containerRef as React.RefObject<HTMLDivElement>, () => handleClose());
+      const outsideClickHandler = () => handleClose();
+      useOutsideClick(containerRef as React.RefObject<HTMLDivElement>, outsideClickHandler);
     }
   }, [containerRef]);
   
   
-  
   const handleOpen = () => {
     setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    onCardClose(index);
   };
 
   return (

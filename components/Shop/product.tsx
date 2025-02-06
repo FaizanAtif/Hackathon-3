@@ -50,26 +50,33 @@ const query = `*[_type == 'product']{
   category
 }`;
 
-const data = await client.fetch(query);
-
 const Product = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]); // State to store products
   const [sortBy, setSortBy] = useState('relevance');
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
-  
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-  const currentProducts = data.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(data.length / productsPerPage);
-
   const [filters, setFilters] = useState<FilterState>({
     category: 'all',
     color: 'all',
     size: 'all',
     minPrice: 20,
-    maxPrice: 396
+    maxPrice: 396,
   });
+
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = products.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  // Fetch products from Sanity inside useEffect
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await client.fetch(query);
+      setProducts(data); // Set the fetched data to products state
+    };
+
+    fetchData(); // Call the fetch function
+  }, []); // Empty dependency array to fetch once when component mounts
 
   // Filter and sort products
   useEffect(() => {
@@ -105,11 +112,7 @@ const Product = () => {
 
     setProducts(result);
     setCurrentPage(1); // Reset to first page when filters change
-  }, [filters, sortBy]);
-
-  useEffect(() => {
-    setProducts(data);
-  }, []);
+  }, [filters, sortBy, products]); // Dependency includes products now
 
   // Generate array of page numbers
   const getPageNumbers = () => {
@@ -188,7 +191,7 @@ const Product = () => {
         {/* Products Grid */}
         <div className="flex-1">
           <div className="flex justify-between items-center mb-6">
-            <div>Showing {startIndex + 1}-{Math.min(endIndex, data.length)} of {data.length} Results</div>
+            <div>Showing {startIndex + 1}-{Math.min(endIndex, products.length)} of {products.length} Results</div>
             <Select value={sortBy} onValueChange={(value: string) => setSortBy(value)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Sort by" />
@@ -202,33 +205,33 @@ const Product = () => {
           </div>
 
           <div className="grid grid-cols-1 mt-20 md:grid-cols-3 gap-12 mb-11">
-          {currentProducts.map((val: Product, i: number) => (
-  <div className="h-[67ch]" key={i}>
-    <Link href={`/product/${val.slug}`}>
-      <div className="card bg-base-100 shadow-sm h-[65ch]">
-        <figure>
-          <Image width={450} height={280} src={val.imageUrl} alt="Shoes" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title text-start">
-            {val.productName}
-            <div className="badge badge-sm bg-slate-200 text-black">NEW</div>
-          </h2>
-          <p className="">In Stock {val.inventory}</p>
-          <h1 className="scroll-m-20 text-xl font-bold tracking-tight">
-            Price: ${val.price}
-          </h1>
-          <div className="card-actions justify-end">
-            <Button className="bg-gray-300 text-black hover:bg-gray-700 hover:text-white font-semibold w-[195px]">
-              Add to Cart
-            </Button>
-            <Button className="bg-red-600 w-[165px]">Buy Now</Button>
-          </div>
-        </div>
-      </div>
-    </Link>
-  </div>
-))}         
+            {currentProducts.map((val: Product, i: number) => (
+              <div className="h-[67ch]" key={i}>
+                <Link href={`/product/${val.slug}`}>
+                  <div className="card bg-base-100 shadow-sm h-[65ch]">
+                    <figure>
+                      <Image width={450} height={280} src={val.imageUrl} alt="Shoes" />
+                    </figure>
+                    <div className="card-body">
+                      <h2 className="card-title text-start">
+                        {val.productName}
+                        <div className="badge badge-sm bg-slate-200 text-black">NEW</div>
+                      </h2>
+                      <p>In Stock {val.inventory}</p>
+                      <h1 className="scroll-m-20 text-xl font-bold tracking-tight">
+                        Price: ${val.price}
+                      </h1>
+                      <div className="card-actions justify-end">
+                        <Button className="bg-gray-300 text-black hover:bg-gray-700 hover:text-white font-semibold w-[195px]">
+                          Add to Cart
+                        </Button>
+                        <Button className="bg-red-600 w-[165px]">Buy Now</Button>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
 
           {/* Pagination */}
