@@ -1,11 +1,10 @@
 'use client';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { client } from '@/sanity/lib/client';
 import Link from 'next/link';
 import Image from 'next/image';
 
-// Define the Product type
 type Product = {
   productName: string;
   imageUrl: string;
@@ -15,27 +14,27 @@ type Product = {
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
-  const query = searchParams.get('query'); // Get the search query from URL parameters
-  const [products, setProducts] = useState<Product[]>([]); // State to hold the fetched products
+  const query = searchParams.get('query');
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     if (query) {
       const fetchProducts = async () => {
-        // Fetch products from Sanity using the query
         const result = await client.fetch<Product[]>(
-          `*[_type == 'product' && productName match $query]{
+          `*[_type == "product" && lower(productName) match lower($searchQuery)]{
             productName,
             "imageUrl": image.asset->url,
             price,
             "slug": slug.current
           }`,
-          { query: `*${query}*` } // Use wildcard search for partial matches
+          { searchQuery: `*${query}*` }
         );
-        setProducts(result); // Update the state with the fetched products
+        setProducts(result);
       };
+
       fetchProducts();
     }
-  }, [query]); // Re-run effect when query changes
+  }, [query]);
 
   return (
     <div className="container mx-auto px-4 py-8">
