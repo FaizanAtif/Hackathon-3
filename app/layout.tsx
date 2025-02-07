@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 import Navbar from "@/components/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from '@/components/providers';
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,20 +29,18 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    <Providers>
-    
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[90%] mx-auto`}
-      >
-        <Navbar/>
-        {children}
-        <Footer/>
-        
-      </body>
-    </html>
-    
-    </Providers>
+      <Providers>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[90%] mx-auto`}
+          >
+            <Navbar />
+            {children}
+            <Footer />
+            <SpeedInsights />
+          </body>
+        </html>
+      </Providers>
     </ClerkProvider>
   );
 }
