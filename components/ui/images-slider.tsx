@@ -23,20 +23,21 @@ const ImagesSlider = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
-  // Handle next image
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + 1 === images.length ? 0 : prevIndex + 1
-    );
-  };
+// Handle next image
+const handleNext = () => {
+  setCurrentIndex((prevIndex) => {
+    // Ensure state updates correctly in a circular manner
+    return (prevIndex + 1) % images.length;
+  });
+};
 
-  // Handle previous image
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
+// Handle previous image
+const handlePrevious = () => {
+  setCurrentIndex((prevIndex) => {
+    // Ensure state updates correctly in a circular manner
+    return (prevIndex - 1 + images.length) % images.length;
+  });
+};
   // Load images on component mount
   useEffect(() => {
     loadImages();

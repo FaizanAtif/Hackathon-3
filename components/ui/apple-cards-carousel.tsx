@@ -164,11 +164,10 @@ export const Card = ({
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { onCardClose } = useContext(CarouselContext); // Removed currentIndex as it was not needed
-  const handleClose = () =>  {
+  const handleClose = useCallback(() => {
     setOpen(false);
     onCardClose(index);
-  };
-  
+  }, [index, onCardClose]);  // dependencies ko include karna zaroori hai
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -187,13 +186,9 @@ export const Card = ({
   }, [open, handleClose]);  // handleClose ko ab dependencies mein rakhna hai
   
   
-
-  useEffect(() => {
-    if (containerRef.current) {
-      const outsideClickHandler = () => handleClose();
+  const outsideClickHandler = () => handleClose();
       useOutsideClick(containerRef as React.RefObject<HTMLDivElement>, outsideClickHandler);
-    }
-  }, [containerRef]);
+
   
   
   const handleOpen = () => {
