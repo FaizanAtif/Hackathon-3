@@ -81,23 +81,23 @@ const Product = () => {
   // Filter and sort products
   useEffect(() => {
     let result = [...products];
-
+  
     if (filters.category !== 'all') {
       result = result.filter(product => product.category === filters.category);
     }
-
+  
     if (filters.color !== 'all') {
       result = result.filter(product => product.color === filters.color);
     }
-
+  
     if (filters.size !== 'all') {
       result = result.filter(product => product.size === filters.size);
     }
-
+  
     result = result.filter(product =>
       product.price >= filters.minPrice && product.price <= filters.maxPrice
     );
-
+  
     switch (sortBy) {
       case 'price-low':
         result.sort((a, b) => a.price - b.price);
@@ -109,10 +109,10 @@ const Product = () => {
         result.sort((a, b) => a.productName.localeCompare(b.productName));
         break;
     }
-
+  
     setProducts(result);
     setCurrentPage(1); // Reset to first page when filters change
-  }, [filters, sortBy, products]); // Dependency includes products now
+  }, [filters, sortBy]); // Yahan se products hata diya
 
   // Generate array of page numbers
   const getPageNumbers = () => {
