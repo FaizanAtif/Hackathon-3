@@ -112,7 +112,7 @@ const Product = () => {
   
     setProducts(result);
     setCurrentPage(1); // Reset to first page when filters change
-  }, [filters, sortBy]); // Yahan se products hata diya
+  }, [filters, sortBy,products]); // Yahan se products hata diya
 
   // Generate array of page numbers
   const getPageNumbers = () => {
