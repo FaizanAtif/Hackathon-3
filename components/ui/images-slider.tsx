@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 const ImagesSlider = ({
   images,
@@ -23,45 +23,35 @@ const ImagesSlider = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
-// Handle next image
-const handleNext = () => {
-  setCurrentIndex((prevIndex) => {
-    // Ensure state updates correctly in a circular manner
-    return (prevIndex + 1) % images.length;
-  });
-};
+  const handleNext = useCallback(() => {
+    setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
+  }, [images.length]);
 
-// Handle previous image
-const handlePrevious = () => {
-  setCurrentIndex((prevIndex) => {
-    // Ensure state updates correctly in a circular manner
-    return (prevIndex - 1 + images.length) % images.length;
-  });
-};
-  // Load images on component mount
+  const handlePrevious = useCallback(() => {
+    setCurrentIndex(prevIndex => (prevIndex - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  const loadImages = useCallback(async () => {
+    try {
+      const loadPromises = images.map(image => {
+        return new Promise<string>((resolve, reject) => {
+          const img = new Image();
+          img.src = image;
+          img.onload = () => resolve(image);
+          img.onerror = reject;
+        });
+      });
+      const loaded = await Promise.all(loadPromises);
+      setLoadedImages(loaded);
+    } catch (error) {
+      console.error("Failed to load images", error);
+    }
+  }, [images]);
+
   useEffect(() => {
     loadImages();
-  }, [images]); // Add `images` as a dependency to reload images if the array changes
+  }, [loadImages]);
 
-  const loadImages = () => {
-    const loadPromises = images.map((image) => {
-      return new Promise<string>((resolve, reject) => {
-        const img = new Image();
-        img.src = image;
-        img.onload = () => resolve(image);
-        img.onerror = reject;
-      });
-    });
-
-    // Once images are loaded, set state
-    Promise.all(loadPromises)
-      .then((loadedImages) => {
-        setLoadedImages(loadedImages);
-      })
-      .catch((error) => console.error("Failed to load images", error));
-  };
-
-  // Handle keyboard navigation and autoplay
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
@@ -73,21 +63,17 @@ const handlePrevious = () => {
 
     window.addEventListener("keydown", handleKeyDown);
 
-    // Autoplay logic
     let interval: NodeJS.Timeout;
     if (autoplay) {
-      interval = setInterval(() => {
-        handleNext();
-      }, 5000);
+      interval = setInterval(handleNext, 5000);
     }
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       if (interval) clearInterval(interval);
     };
-  }, [autoplay, handleNext, handlePrevious]); // Added dependencies to prevent missing ones
+  }, [autoplay, handleNext, handlePrevious]);
 
-  // Animation variants for sliding effect
   const slideVariants = {
     initial: {
       scale: 0,
@@ -132,15 +118,9 @@ const handlePrevious = () => {
       }}
     >
       {areImagesLoaded && children}
-
-      {/* Overlay if enabled */}
       {areImagesLoaded && overlay && (
-        <div
-          className={cn("absolute inset-0 bg-black/60 z-40", overlayClassName)}
-        />
+        <div className={cn("absolute inset-0 bg-black/60 z-40", overlayClassName)} />
       )}
-
-      {/* Image transition using framer-motion */}
       {areImagesLoaded && (
         <AnimatePresence>
           <motion.img
