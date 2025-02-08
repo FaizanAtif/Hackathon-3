@@ -20,8 +20,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useMemo } from 'react';
 
-// Define types
 type Product = {
   productName: string;
   imageUrl: string;
@@ -79,7 +79,7 @@ const Product = () => {
   }, []); // Empty dependency array to fetch once when component mounts
 
   // Filter and sort products
-  useEffect(() => {
+  const filteredProducts = useMemo(() => {
     let result = [...products];
   
     if (filters.category !== 'all') {
@@ -110,9 +110,9 @@ const Product = () => {
         break;
     }
   
-    setProducts(result);
-    setCurrentPage(1); // Reset to first page when filters change
-  }, [filters, sortBy,products]); // Yahan se products hata diya
+    return result;
+  }, [products, filters, sortBy]);  // Yeh sirf jab filters ya sorting change hogi tab run hoga
+
 
   // Generate array of page numbers
   const getPageNumbers = () => {
@@ -203,6 +203,9 @@ const Product = () => {
               </SelectContent>
             </Select>
           </div>
+
+
+          {/* Main products */}
 
           <div className="grid grid-cols-1 mt-20 md:grid-cols-3 gap-12 mb-11">
             {currentProducts.map((val: Product, i: number) => (
