@@ -113,6 +113,9 @@ const Product = () => {
     return result;
   }, [products, filters, sortBy]);  // Yeh sirf jab filters ya sorting change hogi tab run hoga
 
+  console.log(filteredProducts);
+  
+
 
   // Generate array of page numbers
   const getPageNumbers = () => {
