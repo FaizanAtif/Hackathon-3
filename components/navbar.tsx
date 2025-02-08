@@ -7,14 +7,16 @@ import { SignUpButton, UserButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 import { useAppSelector } from '@/app/store/hooks/useAppSelector';
 import { useRouter } from 'next/navigation';
-
+import { CiSearch } from 'react-icons/ci';
+import { IoClose } from 'react-icons/io5';
 
 const Navbar = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const { isSignedIn } = useUser();
   const cartItems = useAppSelector((state) => state.cart.items);
-  
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -23,63 +25,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar bg-base-100">
+    <nav className="navbar bg-base-100 fixed antialiased max-w-[90%] max-h-[10%]  mx-auto z-20">
       {/* Navbar Start */}
       <div className="navbar-start flex items-center">
-        {/* Mobile Menu Toggle */}
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          {/* Mobile Menu Dropdown */}
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow-md z-10"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
-        </div>
+        <button onClick={() => setMenuOpen(!menuOpen)} className="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-8 6h8" />
+          </svg>
+        </button>
 
-        {/* Logo and Brand Name */}
         <Link href="/" className="flex title-font font-bold items-center text-gray-900">
-          <Image
-            src={logo}
-            alt="Urban Walks Logo"
-            className="w-16 h-16 md:w-20 md:h-20 md:ml-8"
-            priority // Prioritize loading the logo for better SEO
-          />
-          <span className="scroll-m-20 text-2xl md:text-3xl tracking-tight ml-2">
-            Urban Walks
-          </span>
+          <Image src={logo} alt="Urban Walks Logo" className="w-16 h-16 md:w-20 md:h-20 md:ml-8" priority />
+          <span className="text-2xl md:text-3xl tracking-tight ml-2">Urban Walks</span>
         </Link>
       </div>
 
@@ -89,29 +46,21 @@ const Navbar = () => {
       </div>
 
       {/* Navbar End */}
-      <div className="navbar-end flex">
-        {/* Search Bar (Desktop Only) */}
-        <form onSubmit={handleSearch} className="relative text-gray-900 lg:block hidden">
-        <input
-          type="search"
-          name="search"
-          placeholder="Search products..."
-          className="bg-slate-100 h-10 px-5 pr-10 rounded-2xl text-sm focus:outline-none"
-          aria-label="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-          <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
-            <svg
-              className="h-4 w-5 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 56.966 56.966"
-            >
-              <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17s-17-7.626-17-17S14.61,6,23.984,6z" />
-            </svg>
+      <div className="navbar-end flex items-center mr-6 lg:mr-16 sm:mr-16 md:mr-16 space-x-2">
+        {/* Search Bar */}
+        <form onSubmit={handleSearch} className="relative text-gray-900 hidden lg:block">
+          <input
+            type="search"
+            name="search"
+            placeholder="Search products..."
+            className="bg-slate-100 h-10 px-5 pr-10 rounded-2xl text-sm focus:outline-none"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit" className="absolute right-3 top-2.5 text-gray-600">
+            <CiSearch className="h-5 w-5" />
           </button>
         </form>
-        
 
         {/* Cart Icon with Badge */}
         <div className="dropdown dropdown-end z-10">
@@ -142,18 +91,55 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* User Button and Sign Up */}
-        <div className="navbar-end md:space-x-7">
-          <UserButton />
-          {!isSignedIn && (
-            <SignUpButton>
-              <button className="px-4 py-2 bg-primary text-white rounded-lg bg-red-600 hover:bg-red-800 transition-colors duration-300 font-semibold text-sm">
-                Sign Up
-              </button>
-            </SignUpButton>
-          )}
-        </div>
+        {/* User Actions */}
+        <UserButton />
+        {!isSignedIn && (
+          <SignUpButton>
+            <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-800 transition">Sign Up</button>
+          </SignUpButton>
+        )}
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {menuOpen && (
+        <div className="absolute  top-full left-0 w-full bg-white shadow-lg z-50 p-10 rounded-b-lg border-t border-gray-200 flex flex-col gap-4">
+          {/* Close Button */}
+          <button onClick={() => setMenuOpen(false)} className="absolute top-2 right-4 text-gray-700 text-2xl">
+            <IoClose />
+          </button>
+
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="relative w-full">
+            <input
+              type="search"
+              name="search"
+              placeholder="Search products..."
+              className="bg-slate-100 h-10 px-5 pr-10 rounded-xl text-sm focus:outline-none w-full"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button type="submit" className="absolute right-3 top-2.5 text-gray-600">
+              <CiSearch className="h-5 w-5" />
+            </button>
+          </form>
+
+          {/* Navigation Links */}
+          <ul className="w-full text-gray-800 font-medium space-y-3 border-b pb-3">
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/about">About</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/shop">Shop</Link></li>
+          </ul>
+
+          {/* Category Links */}
+          <ul className="w-full text-gray-800 font-medium space-y-3">
+            <li className="border-b pb-2"><Link href="/shop/boots">Boots</Link></li>
+            <li className="border-b pb-2"><Link href="/shop/running-shoes">Running Shoes</Link></li>
+            <li className="border-b pb-2"><Link href="/shop/training-shoes">Training Shoes</Link></li>
+            <li className="pb-2"><Link href="/shop/football-shoes">Football Shoes</Link></li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };

@@ -1,4 +1,5 @@
 'use client'
+
 import * as React from "react"
 import { Card } from "@/components/ui/card"
 import {
@@ -16,44 +17,48 @@ import product5 from '@/public/product5.jpg'
 import Image from "next/image"
 import Autoplay from "embla-carousel-autoplay"
 
-const images = [product3, product4, product1, product5, product2]
+const images = [
+  { src: product3, alt: "Trendy sneakers in stock" },
+  { src: product4, alt: "Classic leather boots for men" },
+  { src: product1, alt: "Stylish running shoes" },
+  { src: product5, alt: "Casual wear sneakers on sale" },
+  { src: product2, alt: "Limited edition streetwear shoes" }
+]
 
 export default function ProductCarousel() {
   return (
-    <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-8">
-      <div className="mt-20 sm:mt-30 mb-11 text-center">
-        <p className="font-bold text-2xl mb-2">BEST SELLING THIS WEEK</p>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-6xl">
+    <section className="w-full max-w-[1400px] mx-auto px-4 sm:px-8">
+      <header className="mt-14 sm:mt-24 mb-10 text-center">
+        <h2 className="font-bold text-lg sm:text-2xl text-black">BEST SELLING THIS WEEK</h2>
+        <h3 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-6xl">
           BEST SELLING
-        </h1>
-        <p className="italic font-bold text-2xl mt-2">
-          Dont wait for opportunities, create them
+        </h3>
+        <p className="italic font-bold text-xl sm:text-2xl text-black">
+          Dont wait for opportunities, create them.
         </p>
-      </div>
+      </header>
+
       <Carousel
         plugins={[
-          Autoplay({
-            delay: 2000,
-          }),
+          Autoplay({ delay: 2000, stopOnInteraction: true }), // Pauses on hover or user interaction
         ]}
-        opts={{
-          align: "start",
-        }}
+        opts={{ align: "start" }}
         className="w-full"
       >
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index} className="sm:basis-1/2 lg:basis-1/3">
-              <div className="p-1 mb-16">
-                <Card className="overflow-hidden">
-                  {/* Carousel Image */}
-                  <div className="relative w-full h-[300px] sm:h-[400px]">
+              <div className="p-2 mb-10">
+                <Card className="overflow-hidden shadow-lg">
+                  {/* Image Container */}
+                  <div className="relative w-full h-[250px] sm:h-[350px]">
                     <Image
-                      src={image}
-                      alt={`Product ${index + 1}`}
+                      src={image.src}
+                      alt={image.alt}
                       fill
-                      style={{ objectFit: "cover" }} // Keeps the aspect ratio and covers the container without stretching
-                      priority={index === 0} // Prioritize loading the first image
+                      style={{ objectFit: "cover" }}
+                      priority={index === 0} // Prioritize first image for performance
+                      loading={index === 0 ? "eager" : "lazy"} // Lazy load other images
                     />
                   </div>
                 </Card>
@@ -61,10 +66,11 @@ export default function ProductCarousel() {
             </CarouselItem>
           ))}
         </CarouselContent>
+
         {/* Carousel Controls */}
-        <CarouselPrevious className="left-4 sm:left-8" />
-        <CarouselNext className="right-4 sm:right-8" />
+        <CarouselPrevious className="left-4 sm:left-8" aria-label="Previous slide" />
+        <CarouselNext className="right-4 sm:right-8" aria-label="Next slide" />
       </Carousel>
-    </div>
+    </section>
   )
 }
