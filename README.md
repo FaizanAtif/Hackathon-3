@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hackathon 3 - Urban Walks (E-Commerce Frontend)
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project is my submission for **Hackathon 3**, a challenge given by **GIAIC Course**. It is a complete frontend-based e-commerce project built using **Next.js**. Over the span of **7 days**, I worked on and successfully completed all the assigned tasks, creating **Urban Walks**, a **Shoe Store** as my e-commerce theme.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js** - Framework for React applications
+- **React.js** - Library for building UI components
+- **TypeScript** - For type safety and maintainability
+- **Tailwind CSS** - For styling and responsive design
+- **Sanity CMS** - For content management (if applicable)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features Implemented
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Home Page** - Showcasing latest shoe collections
+- **Product Listing** - Displays available shoes with details
+- **Product Detail Page** - Individual shoe information with images
+- **Cart System** - Add and remove products from the cart
+- **Checkout Page** - A structured checkout experience
+- **Responsive Design** - Fully functional across devices
 
-## Learn More
+## Learning Experience
 
-To learn more about Next.js, take a look at the following resources:
+This project was a fantastic experience that allowed me to enhance my **Next.js, React, TypeScript, and Tailwind CSS** skills. Completing daily tasks improved my problem-solving abilities and deepened my understanding of frontend development in e-commerce.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to Run Locally
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/FaizanAtif/Hackathon-3.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd my-app
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+   pnpm dev
+   ```
+5. Open `http://localhost:3000` in your browser.
 
-## Deploy on Vercel
+## Conclusion
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project was an exciting journey where I learned a lot about frontend development. It reinforced my skills in building dynamic and responsive web applications. I look forward to working on more complex projects in the future!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Feel free to connect with me for feedback or collaboration!
+
+**Author:** Faizan Atif\
+**GitHub:** [https://github.com/FaizanAtif](https://github.com/FaizanAtif)\
+**LinkedIn:** [https://www.linkedin.com/in/faizan-atif123/](https://www.linkedin.com/in/faizan-atif123/)\
+**Live Demo:** [https://urbanwalks.vercel.app/](https://urbanwalks.vercel.app/)
+
